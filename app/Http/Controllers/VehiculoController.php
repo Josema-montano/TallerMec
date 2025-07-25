@@ -27,13 +27,25 @@ class VehiculoController extends Controller
             'cliente_id' => 'required|exists:clientes,id',
             'marca'      => 'required|string|max:50',
             'modelo'     => 'required|string|max:50',
-            'anio'       => 'required|integer|digits:4',
-            'patente'      => ['required', 'string', 'max:20', Rule::unique('vehiculos')],
+            'anio'       => 'required|string|size:4',  // Validación como string para evitar error
+            'patente'    => ['required', 'string', 'max:20', Rule::unique('vehiculos')],
             'vin'        => ['required', 'string', 'max:50', Rule::unique('vehiculos')],
             'color'      => 'nullable|string|max:30',
+            'imagen'     => 'nullable|file|image|max:2048',
         ]);
 
-        Vehiculo::create($validated);
+        $data = $validated;
+
+        // Forzar entero para anio antes de guardar
+        if (isset($data['anio'])) {
+            $data['anio'] = (int) $data['anio'];
+        }
+
+        if ($request->hasFile('imagen')) {
+            $data['imagen'] = $request->file('imagen')->store('vehiculos', 'public');
+        }
+
+        Vehiculo::create($data);
 
         return redirect()->route('vehiculos.index')->with('success', 'Vehículo registrado.');
     }
@@ -50,13 +62,25 @@ class VehiculoController extends Controller
             'cliente_id' => 'required|exists:clientes,id',
             'marca'      => 'required|string|max:50',
             'modelo'     => 'required|string|max:50',
-            'anio'       => 'required|integer|digits:4',
-            'patente'      => ['required', 'string', 'max:20', Rule::unique('vehiculos')->ignoreModel($vehiculo)],
+            'anio'       => 'required|string|size:4',  // Consistencia con store
+            'patente'    => ['required', 'string', 'max:20', Rule::unique('vehiculos')->ignoreModel($vehiculo)],
             'vin'        => ['required', 'string', 'max:50', Rule::unique('vehiculos')->ignoreModel($vehiculo)],
             'color'      => 'nullable|string|max:30',
+            'imagen'     => 'nullable|file|image|max:2048',
         ]);
 
-        $vehiculo->update($validated);
+        $data = $validated;
+
+        // Forzar entero para anio antes de actualizar
+        if (isset($data['anio'])) {
+            $data['anio'] = (int) $data['anio'];
+        }
+
+        if ($request->hasFile('imagen')) {
+            $data['imagen'] = $request->file('imagen')->store('vehiculos', 'public');
+        }
+
+        $vehiculo->update($data);
 
         return redirect()->route('vehiculos.index')->with('success', 'Vehículo actualizado.');
     }

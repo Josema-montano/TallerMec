@@ -3,18 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Repuesto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'precio_unitario', 'stock_actual'];
+    protected $fillable = [
+        'codigo',
+        'nombre',
+        'precio_unitario',
+        'stock_actual',
+        'imagen', 
+    ];
 
-    public function cotizaciones(): BelongsToMany
+    
+    public function imagenUrl(): string
     {
-        return $this->belongsToMany(Cotizacion::class, 'cotizaciones_repuestos')
-                    ->withPivot('cantidad', 'precio_total');
+        return $this->imagen ? asset('storage/' . $this->imagen) : asset('images/default-repuesto.png');
     }
 }

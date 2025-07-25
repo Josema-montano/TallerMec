@@ -85,13 +85,12 @@ class CotizacionController extends Controller
             'aprobada' => $validated['aprobada'],
         ]);
 
-        // SINCRONIZAR REPUESTOS Y ACTUALIZAR STOCK
         if (!empty($repuestosData)) {
             $cotizacion->repuestos()->sync($repuestosData);
 
             foreach ($repuestosData as $id => $datos) {
                 $repuesto = Repuesto::find($id);
-                $repuesto->decrement('stock_actual', $datos['cantidad']); // CORREGIDO
+                $repuesto->decrement('stock_actual', $datos['cantidad']); 
             }
         }
 

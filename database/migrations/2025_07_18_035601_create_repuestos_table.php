@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
- // database/migrations/xxxx_create_repuestos_table.php
-Schema::create('repuestos', function (Blueprint $table) {
-    $table->id();
-    $table->string('codigo')->unique();
-    $table->string('nombre');
-    $table->decimal('precio_unitario', 8, 2);
-    $table->integer('stock_actual')->default(0);
-    $table->timestamps();
-});
+        Schema::create('repuestos', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo')->unique();
+            $table->string('nombre');
+            $table->decimal('precio_unitario', 8, 2);
+            $table->integer('stock_actual')->default(0);
+            $table->string('imagen')->nullable(); // <-- agregamos imagen nullable
+            $table->timestamps();
+        });
     }
     public function down(): void { Schema::dropIfExists('repuestos'); }
 };

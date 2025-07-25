@@ -20,11 +20,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('repuestos', RepuestoController::class)
         ->parameters(['repuestos' => 'repuesto']);
 
-    // CRUD de Cotizaciones
     Route::resource('cotizaciones', CotizacionController::class)
         ->parameters(['cotizaciones' => 'cotizacion']);
 
-    // Ruta personalizada para generar PDF
     Route::get('cotizaciones/{cotizacion}/pdf', [CotizacionController::class, 'pdf'])
         ->name('cotizaciones.pdf');
 });
