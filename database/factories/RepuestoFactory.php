@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Database\Factories;
 
 use App\Models\Repuesto;
@@ -12,9 +13,10 @@ class RepuestoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre'        => fake()->words(3, true),
+            'codigo'         => strtoupper(fake()->unique()->bothify('REP-####')),
+            'nombre'         => fake()->words(3, true),
             'precio_unitario'=> fake()->randomFloat(2, 5, 200),
-            'stock_actual'  => fake()->numberBetween(0, 100),
+            'stock_actual'   => fake()->numberBetween(0, 100),
         ];
     }
 }

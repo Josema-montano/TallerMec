@@ -11,11 +11,15 @@ class CotizacionFactory extends Factory
 
     public function definition(): array
     {
+        $totalServicio = $this->faker->randomFloat(2, 50, 1000);
+        $totalRepuestos = $this->faker->randomFloat(2, 0, 500);
+
         return [
-            'orden_id'      => null,      
-            'fecha'         => fake()->dateTimeThisMonth(),
-            'total_estimado'=> fake()->randomFloat(2, 50, 1000),
-            'aprobada'      => fake()->boolean(),
+            'orden_id'        => null,
+            'fecha'           => $this->faker->dateTimeThisMonth(),
+            'total_servicio'  => $totalServicio,
+            'total'           => $totalServicio + $totalRepuestos,
+            'aprobada'        => $this->faker->boolean(),
         ];
     }
 }

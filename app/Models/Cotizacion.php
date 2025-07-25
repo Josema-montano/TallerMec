@@ -1,18 +1,37 @@
 <?php
+
 namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Cotizacion extends Model {
-     use HasFactory;
-     protected $table = 'cotizaciones';
-    protected $fillable = ['orden_id','fecha','total_estimado','aprobada'];
+class Cotizacion extends Model
+{
+    use HasFactory;
 
-    public function orden(): BelongsTo { return $this->belongsTo(OrdenTrabajo::class); }
-    public function repuestos(): BelongsToMany {
-        return $this->belongsToMany(Repuesto::class,'cotizaciones_repuestos')
-                    ->withPivot('cantidad','precio_total');
+    protected $table = 'cotizaciones';
+
+   protected $fillable = [
+    'orden_id',
+    'fecha',
+    'total_servicio',
+    'total',
+    'aprobada',
+];
+
+
+    protected $casts = [
+        'fecha' => 'date',
+    ];
+
+    public function orden()
+    {
+        return $this->belongsTo(OrdenTrabajo::class);
+    }
+
+    public function repuestos()
+    {
+        return $this->belongsToMany(Repuesto::class, 'cotizaciones_repuestos')
+                    ->withPivot('cantidad', 'precio_total');
     }
 }

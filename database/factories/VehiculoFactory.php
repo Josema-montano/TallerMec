@@ -17,6 +17,8 @@ class VehiculoFactory extends Factory
             'marca'      => fake()->randomElement(['Ford','Chevrolet','Toyota','VW']),
             'modelo'     => fake()->word(),
             'anio'       => fake()->year(),
+            'color' => fake()->safeColorName(),
+            'vin' => strtoupper(fake()->unique()->bothify('VIN#######')),
         ];
     }
 }
