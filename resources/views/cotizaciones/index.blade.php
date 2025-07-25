@@ -184,6 +184,52 @@
                             </a>
                         </div>
                     </div>
+                    
+                    <!-- Problema reportado -->
+                    <div class="col-span-3">
+                        <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-red-500">
+                            @if($cotizacion->orden->descripcion_problema)
+                                <div class="flex items-start">
+                                    <svg class="w-4 h-4 text-red-500 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900 mb-1">Problema reportado:</div>
+                                        <div class="text-sm text-gray-700 leading-relaxed">
+                                            {{ Str::limit($cotizacion->orden->descripcion_problema, 100) }}
+                                        </div>
+                                        @if(strlen($cotizacion->orden->descripcion_problema) > 100)
+                                            <button class="text-xs text-blue-600 hover:text-blue-800 mt-1 font-medium" 
+                                                    onclick="toggleDescription({{ $cotizacion->id }})">
+                                                Ver más...
+                                            </button>
+                                            <div id="full-description-{{ $cotizacion->id }}" class="hidden text-sm text-gray-700 mt-2">
+                                                {{ $cotizacion->orden->descripcion_problema }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @else
+                                <div class="flex items-center text-gray-400">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-sm italic">Sin descripción del problema</span>
+                                </div>
+                            @endif
+                            
+                            @if($cotizacion->kilometraje)
+                                <div class="mt-2 pt-2 border-t border-gray-200">
+                                    <div class="flex items-center text-xs text-gray-600">
+                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                        </svg>
+                                        Kilometraje: {{ number_format($cotizacion->kilometraje) }} km
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                     @empty
                     <!-- Empty State -->
                     <div class="px-8 py-16 text-center">
@@ -330,4 +376,4 @@
     </section>
 </div>
 
-@endsection
+@endsection 
