@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\OrdenTrabajo;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrdenFinalizadaMail;
 
 class OrdenTrabajoController extends Controller
 {
@@ -43,22 +45,41 @@ class OrdenTrabajoController extends Controller
     }
 
     public function update(Request $request, $ordene)
-{
-    $validated = $request->validate([
-    'vehiculo_id' => 'required|exists:vehiculos,id',
-    'fecha_ingreso' => 'required|date',
-    'fecha_estimada_fin' => 'nullable|date|after_or_equal:fecha_ingreso',
-    'estado' => 'required|in:pendiente,en_proceso,finalizado,cancelado',
-    'descripcion_problema' => 'nullable|string',
-    'kilometraje' => 'nullable|integer|min:0',
-]);
+    {
+        $validated = $request->validate([
+            'vehiculo_id' => 'required|exists:vehiculos,id',
+            'fecha_ingreso' => 'required|date',
+            'fecha_estimada_fin' => 'nullable|date|after_or_equal:fecha_ingreso',
+            'estado' => 'required|in:pendiente,en_proceso,finalizado,cancelado',
+            'descripcion_problema' => 'nullable|string',
+            'kilometraje' => 'nullable|integer|min:0',
+        ]);
 
+        $orden = OrdenTrabajo::findOrFail($ordene);
+        $estadoAnterior = $orden->estado;
+        
+        $orden->update($validated);
+        
+        // Si el estado cambió a finalizado, enviar email de notificación
+        if ($estadoAnterior !== 'finalizado' && $validated['estado'] === 'finalizado') {
+            // Actualizar fecha de entrega si no está establecida
+            if (!$orden->fecha_entrega) {
+                $orden->update(['fecha_entrega' => now()]);
+            }
+            
+            // Enviar email al cliente
+            try {
+                $orden->load('vehiculo.cliente');
+                Mail::to($orden->vehiculo->cliente->email)
+                    ->send(new OrdenFinalizadaMail($orden));
+            } catch (\Exception $e) {
+                // Log del error pero no interrumpir el flujo
+                \Log::error('Error enviando email de orden finalizada: ' . $e->getMessage());
+            }
+        }
 
-    $orden = OrdenTrabajo::findOrFail($ordene);
-    $orden->update($validated);
-
-    return redirect()->route('ordenes.index')->with('success', 'Orden actualizada.');
-}
+        return redirect()->route('ordenes.index')->with('success', 'Orden actualizada.');
+    }
     public function destroy(OrdenTrabajo $orden)
     {
         $orden->delete();

@@ -30,6 +30,11 @@ class OrdenTrabajo extends Model
         'fecha_entrega' => 'date',
     ];
 
+    public function comentarios(): HasMany
+    {
+        return $this->hasMany(Comentario::class, 'orden_id');
+    }
+
     public function vehiculo(): BelongsTo
     {
         return $this->belongsTo(Vehiculo::class);
@@ -49,4 +54,6 @@ class OrdenTrabajo extends Model
     {
         return $this->hasMany(Notificacion::class);
     }
+
+
 }

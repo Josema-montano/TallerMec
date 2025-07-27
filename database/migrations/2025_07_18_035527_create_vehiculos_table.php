@@ -12,7 +12,7 @@ return new class extends Migration {
     $table->string('marca');
     $table->string('modelo');
     $table->year('anio');
-    $table->string('vin')->unique();
+    $table->string('vin')->nullable()->unique();
     $table->string('color')->nullable();
     $table->string('imagen')->nullable(); // <-- imagen
     $table->timestamps();

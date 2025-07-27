@@ -48,6 +48,7 @@
                 <a href="{{ route('ordenes.index') }}" class="text-gray-600 font-medium hover:text-red-600 transition-colors">Órdenes</a>
                 <a href="{{ route('repuestos.index') }}" class="text-gray-600 font-medium hover:text-red-600 transition-colors">Repuestos</a>
                 <a href="{{ route('cotizaciones.index') }}" class="text-gray-600 font-medium hover:text-red-600 transition-colors">Cotizaciones</a>
+                <a href="{{ route('comentarios.index') }}" class="text-gray-600 font-medium hover:text-red-600 transition-colors">Comentarios</a>
             </div>
         </div>
     </div>

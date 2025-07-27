@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\OrdenTrabajoController;
+use App\Http\Controllers\ClientePortalController;
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin');
@@ -25,4 +27,14 @@ Route::prefix('admin')->group(function () {
 
     Route::get('cotizaciones/{cotizacion}/pdf', [CotizacionController::class, 'pdf'])
         ->name('cotizaciones.pdf');
+
+    Route::resource('comentarios', \App\Http\Controllers\Admin\ComentarioController::class);
+});
+
+// Rutas del portal de cliente
+Route::prefix('cliente')->name('cliente.')->group(function () {
+    Route::get('/', [ClientePortalController::class, 'index'])->name('index');
+    Route::post('/reservar', [ClientePortalController::class, 'reservarServicio'])->name('reservar');
+    Route::get('/mis-ordenes', [ClientePortalController::class, 'misOrdenes'])->name('mis-ordenes');
+    Route::post('/comentario', [ClientePortalController::class, 'agregarComentario'])->name('comentario');
 });
