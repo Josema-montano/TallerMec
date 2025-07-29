@@ -9,9 +9,18 @@ use Illuminate\Validation\Rule;
 
 class VehiculoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $vehiculos = Vehiculo::with('cliente')->paginate(10);
+        $query = Vehiculo::with('cliente');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('patente', 'like', '%' . $search . '%')
+                  ->orWhere('marca', 'like', '%' . $search . '%')
+                  ->orWhere('modelo', 'like', '%' . $search . '%');
+        }
+
+        $vehiculos = $query->latest()->paginate(10);
         return view('vehiculos.index', compact('vehiculos'));
     }
 

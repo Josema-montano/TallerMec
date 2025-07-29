@@ -68,6 +68,18 @@
                 <h2 class="text-4xl font-bold text-white mb-8">CLIENTES REGISTRADOS</h2>
                 <p class="text-gray-300 text-lg">Base de datos completa con información detallada de contacto</p>
             </div>
+
+            <!-- Search Form -->
+            <div class="mb-8">
+                <form action="{{ route('clientes.index') }}" method="GET" class="flex items-center space-x-4">
+                    <input type="text" name="search" placeholder="Buscar clientes por nombre o email..." value="{{ request('search') }}"
+                           class="flex-1 p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-red-500 focus:ring focus:ring-red-500 focus:ring-opacity-50">
+                    <button type="submit"
+                            class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300">
+                        Buscar
+                    </button>
+                </form>
+            </div>
             
             <!-- Clients Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

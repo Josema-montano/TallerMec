@@ -8,9 +8,17 @@ use Illuminate\Validation\Rule;
 
 class ClienteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::latest()->paginate(10);
+        $query = Cliente::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('nombre', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%');
+        }
+
+        $clientes = $query->latest()->paginate(10);
         return view('clientes.index', compact('clientes'));
     }
 
