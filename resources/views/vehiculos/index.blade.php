@@ -131,10 +131,7 @@
                         
                         <!-- Actions -->
                         <div class="flex space-x-2">
-                            <a href="{{ route('vehiculos.show', $v) }}" 
-                               class="flex-1 bg-gray-700 text-white text-center py-2 rounded-lg hover:bg-gray-600 transition-colors duration-300 text-sm font-semibold">
-                                Ver Detalles
-                            </a>
+                           
                             <a href="{{ route('vehiculos.edit', $v) }}" 
                                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,30 +205,14 @@
     <!-- Quick Stats Section -->
     <section class="py-16 bg-gray-900 border-t border-gray-700">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 gap-4 text-white">
                 <!-- Total Vehicles -->
                 <div class="text-center">
                     <div class="text-3xl font-bold text-red-500 mb-2">{{ $vehiculos->total() }}</div>
                     <div class="text-gray-400 uppercase tracking-wide text-sm">Total Vehículos</div>
                 </div>
                 
-                <!-- Active Vehicles -->
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-green-500 mb-2">{{ $vehiculos->where('status', 'activo')->count() }}</div>
-                    <div class="text-gray-400 uppercase tracking-wide text-sm">Activos</div>
-                </div>
-                
-                <!-- In Service -->
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-yellow-500 mb-2">0</div>
-                    <div class="text-gray-400 uppercase tracking-wide text-sm">En Servicio</div>
-                </div>
-                
-                <!-- Completed -->
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-500 mb-2">0</div>
-                    <div class="text-gray-400 uppercase tracking-wide text-sm">Completados</div>
-                </div>
+
             </div>
         </div>
     </section>

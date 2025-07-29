@@ -142,7 +142,7 @@
                         </div>
                         
                         <!-- Statistics -->
-                        <div class="grid grid-cols-3 gap-4 mb-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
+                        <div class="grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
                             <div class="text-center">
                                 <div class="text-2xl font-bold text-red-500">{{ $c->vehiculos ? $c->vehiculos->count() : 0 }}</div>
                                 <div class="text-xs text-gray-400 uppercase tracking-wide">Vehículos</div>
@@ -151,18 +151,12 @@
                                 <div class="text-2xl font-bold text-blue-500">0</div>
                                 <div class="text-xs text-gray-400 uppercase tracking-wide">Servicios</div>
                             </div>
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-green-500">$0</div>
-                                <div class="text-xs text-gray-400 uppercase tracking-wide">Facturado</div>
-                            </div>
+
                         </div>
                         
                         <!-- Actions -->
                         <div class="flex space-x-3">
-                            <a href="{{ route('clientes.show', $c) }}" 
-                               class="flex-1 bg-gray-700 text-white text-center py-3 rounded-lg hover:bg-gray-600 transition-all duration-300 font-semibold text-sm">
-                                Ver Perfil
-                            </a>
+                            
                             <a href="{{ route('clientes.edit', $c) }}" 
                                class="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

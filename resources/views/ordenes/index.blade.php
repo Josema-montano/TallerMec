@@ -244,10 +244,7 @@
                         
                         <!-- Actions -->
                         <div class="flex space-x-3">
-                            <a href="{{ route('ordenes.show', $o) }}" 
-                               class="flex-1 bg-gray-700 text-white text-center py-3 rounded-lg hover:bg-gray-600 transition-all duration-300 font-semibold text-sm">
-                                Ver Detalles
-                            </a>
+                            
                             <a href="{{ route('ordenes.edit', $o) }}" 
                                class="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
