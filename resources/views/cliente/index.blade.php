@@ -8,7 +8,7 @@
     <section class="relative bg-gray-900 py-24">
         <!-- Imagen de fondo con overlay -->
         <div class="absolute inset-0">
-            <img src="{{ asset('storage/images/interfaces/cliente-hero.jpg') }}"
+            <img src="{{ asset('storage/images/interfaces/ferra-fondo.jpg') }}"
                  alt="Portal Cliente"
                  class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/70"></div>

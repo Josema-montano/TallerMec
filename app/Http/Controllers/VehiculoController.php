@@ -51,7 +51,10 @@ class VehiculoController extends Controller
         }
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('vehiculos', 'public');
+            $file = $request->file('imagen');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('storage/vehiculos'), $filename);
+            $data['imagen'] = 'vehiculos/' . $filename;
         }
 
         Vehiculo::create($data);
@@ -86,7 +89,10 @@ class VehiculoController extends Controller
         }
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('vehiculos', 'public');
+            $file = $request->file('imagen');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('storage/vehiculos'), $filename);
+            $data['imagen'] = 'vehiculos/' . $filename;
         }
 
         $vehiculo->update($data);

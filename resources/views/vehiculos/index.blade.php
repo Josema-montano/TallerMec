@@ -88,7 +88,7 @@
                 <div class="relative bg-gray-900 rounded-xl overflow-hidden group hover:transform hover:scale-105 transition-all duration-500 shadow-2xl">
                     <!-- Vehicle Image -->
                     <div class="relative h-48 overflow-hidden">
-                        <img src="{{ $v->imagen ? asset('storage/' . $v->imagen) : asset('storage/images/default/vehiculo-default.jpg') }}"
+                        <img src="{{ $v->imagen ? asset('storage/' . $v->imagen) : asset('storage/images/default/vehiculo-default.svg') }}"
                              alt="{{ $v->marca }} {{ $v->modelo }}" 
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>

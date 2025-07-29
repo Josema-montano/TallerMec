@@ -32,6 +32,6 @@ class Vehiculo extends Model
     
     public function imagenUrl(): string
     {
-        return $this->imagen ? asset('storage/' . $this->imagen) : asset('images/default-vehiculo.png');
+        return $this->imagen ? asset('storage/' . $this->imagen) : asset('storage/images/default/vehiculo-default.svg');
     }
 }

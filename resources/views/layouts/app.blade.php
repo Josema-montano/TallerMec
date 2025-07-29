@@ -9,6 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50">
+    @include('components.loading-screen')
     <!-- Top Header Bar -->
     <div class="bg-gray-900 text-white text-xs py-2">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#f3f4f6"/>
+  <g transform="translate(50, 80)">
+    <!-- Car body -->
+    <rect x="20" y="60" width="260" height="80" rx="10" fill="#6b7280"/>
+    <!-- Car roof -->
+    <path d="M60 60 L80 20 L220 20 L240 60 Z" fill="#6b7280"/>
+    <!-- Windows -->
+    <rect x="70" y="25" width="160" height="30" rx="5" fill="#e5e7eb"/>
+    <!-- Wheels -->
+    <circle cx="80" cy="150" r="25" fill="#374151"/>
+    <circle cx="220" cy="150" r="25" fill="#374151"/>
+    <circle cx="80" cy="150" r="15" fill="#9ca3af"/>
+    <circle cx="220" cy="150" r="15" fill="#9ca3af"/>
+    <!-- Headlights -->
+    <ellipse cx="280" cy="80" rx="8" ry="12" fill="#fbbf24"/>
+    <ellipse cx="280" cy="120" rx="8" ry="12" fill="#ef4444"/>
+  </g>
+  <text x="200" y="220" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="16">Sin imagen</text>
+</svg>
